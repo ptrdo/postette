@@ -1,0 +1,13 @@
+{
+  "name": "postette-example",
+  "version": "0.1.0",
+  "description": "Sample Implementation Demonstrating Postette to the Person Interacting with a Web Client",
+  "main": "postette.html",
+  "repository": "https://github.com/ptrdo/postette.git",
+  "authors": [
+    "Peter Sylwester <peter.sylwester@gmail.com>"
+  ],
+  "license": "CC-BY-NC-SA-4.0",
+  "private": true,
+  "dependencies": {}
+}

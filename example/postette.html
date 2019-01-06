@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="revised" content="2019/01/03">
+  <title>Postette: Simple</title>
+  <style>
+    @import url(//fonts.googleapis.com/css?family=Roboto:400,700);
+    html,body {
+      font-family: "Roboto", "Calibri", sans-serif;
+      font-weight: normal;
+      font-size: 100%;
+      font-size: unset;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    #main {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      top: 50px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+    #header {
+      position: fixed;
+      width: 100%;
+      height: 50px;
+      top: 0;
+      background: #00202e;
+    }
+    #header > button {
+      float: right;
+      margin: 15px;
+      font-variant: small-caps;
+    }
+    #content {
+      flex: 1;
+    }
+    #footer {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      margin-top: -41px;
+      background-color: whitesmoke;
+      border-top: 1px solid #bcc6cc;
+    }
+    ::-webkit-input-placeholder
+    {
+      color: #4d8bb8;
+      font-style: italic;
+    }
+    :-moz-placeholder,
+    ::-moz-placeholder
+    {
+      color: #4d8bb8;
+      font-style: italic;
+    }
+    :-ms-input-placeholder
+    {
+      color: #4d8bb8;
+      font-style: italic;
+    }
+
+    /* FORM */
+    form[action=demo]
+    {
+      width: 20%;
+      min-width: 21rem;
+      margin: 4rem auto;
+      text-align: left;
+    }
+    form[action=demo] fieldset
+    {
+      display: inline-block;
+      width: 100%;
+      padding: 1rem;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    form[action=demo] input,
+    form[action=demo] select,
+    form[action=demo] textarea
+    {
+      display: block;
+      padding: 4px;
+      margin: 0.5em 0 1em 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    form[action=demo] textarea
+    {
+      resize: vertical;
+    }
+    form[action=demo] input[type=reset],
+    form[action=demo] input[type=submit] {
+      cursor: pointer;
+    }
+    form[action=demo] input[type=checkbox] {
+      display: inline;
+      width: auto;
+      margin: 0 0.3em;
+      vertical-align: unset;
+    }
+    form[action=demo] hr {
+      margin: 1em 0;
+      height: 1px;
+      box-shadow: none;
+      border: none;
+      border-bottom: 1px dotted orange;
+    }
+    button[disabled] {
+      opacity: 0.5;
+    }
+
+    /* CUSTOM LEVEL DEMONSTRATION */
+
+    div[id^=idmnotifier].custom p
+    {
+      background-color: pink;
+      color: black !important;
+    }
+
+    div[id^=idmnotifier] aside table tr td.custom {
+      background-color: pink;
+      color: black;
+      font-variant: small-caps;
+    }
+
+  </style>
+  <script
+      src="../postette.js" type="text/javascript"
+      crossorigin="anonymous"></script>
+  <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous"></script>
+</head>
+<body>
+<main id="main">
+  <header id="header">
+    <button name="signout">signout</button>
+    <button name="log">log</button>
+  </header>
+  <article id="content">
+    <section>
+      <form action="demo" spellcheck="false" autocomplete="off">
+        <fieldset>
+          <legend>Make Postette!</legend>
+          <label>Message</label>
+          <textarea name="message" title="say something" rows="3" wrap="soft" placeholder="a message" required="required" tabindex="0">Hello World!</textarea>
+          <label>Level</label>
+          <select name="level">
+            <option value="error">error</option>
+            <option value="warning">warning</option>
+            <option value="alert" selected>alert</option>
+            <option value="success">success</option>
+          </select>
+          <label>Integrate</label>
+          <select name="integrate">
+            <option value="auto" selected>auto</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+          <label>Delay (time before message)</label>
+          <input type="number" name="delay" value="-1" placeholder="milliseconds" pattern="-?\d*" step="1000" min="-1" max="10000" required="required" tabindex="0">
+          <label>Pause (time during message)</label>
+          <input type="number" name="pause" value="3000" placeholder="milliseconds" pattern="\d*" step="1000" min="0" max="10000" required="required" tabindex="0">
+          <label><input type="checkbox" name="persist"/>Infinity (spinner)</label>
+          <hr/>
+          <input type="submit" value="Toast!" title="Send a Message" tabindex="0">
+          <input type="reset" value="Reset" title="Reset This Form" tabindex="0">
+        </fieldset>
+      </form>
+    </section>
+  </article>
+  <footer id="footer"></footer>
+</main>
+<script type="text/javascript">
+
+  let Postette;
+
+  function notify(event) {
+    event.preventDefault();
+    let message, config = {};
+    let form = event.target;
+    while (!/FORM/i.test(form.nodeName) && "parentNode" in form) {
+      form = form.parentNode;
+    }
+    if ("elements" in form) {
+      for (let input in form.elements) {
+        switch (form.elements[input].name) {
+          case "message":
+            if (message === undefined) {
+              message = form.elements[input].value;
+            }
+            break;
+          case "level":
+            if (config.level === undefined) {
+              config.level = form.elements[input].value;
+            }
+            break;
+          case "integrate":
+            if (config.integrate === undefined) {
+              config.integrate = /auto|null/i.test(form.elements[input].value) ? null : /true/i.test(form.elements[input].value);
+            }
+            break;
+          case "delay":
+            if (config.delay === undefined) {
+              config.delay = parseInt(form.elements[input].value);
+            }
+            break;
+          case "pause":
+            if (config.pause === undefined) {
+              config.pause = parseInt(form.elements[input].value);
+            }
+            break;
+          case "persist":
+            if (form.elements[input].checked) {
+              config.pause = Infinity;
+            }
+            break;
+        }
+      }
+    }
+    Postette.notify(message, config);
+    $(form).find("input[name=persist]").prop("checked", false);
+    $(form).find("input[name=pause]").prop("disabled", false);
+  };
+
+  function render(rootElement) {
+    $("#header > button[name=signout]")
+    .prop("disabled", !comps)
+    .on("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    $("#header > button[name=log]").on("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      Postette.print();
+    });
+    $("input[name=delay]").on("click", function(event) {
+      let v = $(this).val();
+      $(this).attr("min", v < 1 ? -1 : 0);
+      $(this).attr("step", v < 1 ? 1 : 1000);
+    });
+    $("input[name=persist]").on("change", function(event) {
+      $(this).closest("form").find("input[name=pause]")
+      .prop("disabled", $(this).is(":checked"));
+    });
+    $("form[action=demo]").on("reset", function(event) {
+      Postette.close();
+      $(this).closest("form").find("input[name=pause]").prop("disabled", false);
+      Postette.log();
+    });
+    $("form[action=demo]").on("submit", notify);
+
+    $("form").on("click", function(event) {
+       event.stopPropagation();
+       // this prevents the click from bubbling-up to the body...
+    });
+
+    document.body.addEventListener("click", function(event) {
+      Postette.globalClickHandler(event);
+    });
+
+  };
+
+  function addCustomClass(name) {
+    /* @see: <head> <style> div[id^=postette].custom {} */
+    if (arguments.length < 1) { var name = "custom"; }
+    if (Postette !== undefined && !!Postette.setCustomLevel(name)) {
+      let select = document.querySelector("select[name=level]");
+      let option = document.createElement("OPTION");
+      option.setAttribute("value", name);
+      option.appendChild(document.createTextNode(name));
+      select.appendChild(option);
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+    try {
+      Postette = window.postette;
+      Postette.init({
+        echo: true,
+        reiterate: true
+      });
+      addCustomClass("custom");
+      render(document);
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
+
+</script>
+</body>
+</html>

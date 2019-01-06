@@ -1,0 +1,337 @@
+@charset "UTF-8";
+
+/**
+ * Postette, Rendered Styles
+ * This stylesheet is direct result of default parse and append of idmorg-notifier.js
+ * The parentElement's dynamic id attribute value has been substituted here with the selector, div[id^=idmnotifier]
+ * It may be convenient to attach this stylesheet to example HTML instead of dynamic append whenever modifying styles.
+ *
+ * @author peter(dot)sylwester(at)gmail(dot)com
+ * @version 0.1.0, 2019/01/05
+ * @requires normalize.css (or equivalent)
+ * 
+ */
+
+/* POSTETTE */
+
+div[id^=idmnotifier] ins
+{
+  position: fixed;
+  z-index: 2147483547;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: unset;
+  padding: unset;
+  width: auto;
+  text-align: center;
+  opacity: 1;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  transform: none;
+  transition: all 400ms ease;
+  clip-path: inset(0px 0px 0px 0px);
+}
+
+div[id^=idmnotifier] ins p
+{
+  position: relative;
+  display: inline-block;
+  top: -100px;
+  width: 100%;
+  height: 100%;
+  min-width: 200px;
+  margin: 0 auto;
+  padding: 0.5em 0.5em 0.5em 2em;
+  box-sizing: border-box;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: white;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  transition: all 400ms ease;
+}
+
+div[id^=idmnotifier] ins p span
+{
+  display: inline-block;
+  max-width: 50em;
+}
+
+div[id^=idmnotifier].error p
+{
+  background-color: red;
+  color: white;
+}
+
+div[id^=idmnotifier].alert p
+{
+  background-color: #0094d1;
+  color: white;
+}
+
+div[id^=idmnotifier].warning p
+{
+  background-color: #fcd209;
+  color: black;
+}
+
+div[id^=idmnotifier].success p
+{
+  background-color: #00bb55;
+  color: white;
+}
+
+div[id^=idmnotifier] button
+{
+  float: right;
+  margin: 0;
+  padding: 0 8px 0 16px;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  outline: none;
+}
+
+div[id^=idmnotifier] button:hover
+{
+  color: white;
+}
+
+div[id^=idmnotifier] button:active
+{
+  color: black;
+}
+
+div[id^=idmnotifier].persist button
+{
+  visibility: hidden;
+}
+
+@-webkit-keyframes progress
+{
+  to { background-position: 40px 0; }
+}
+
+@-moz-keyframes progress
+{
+  to { background-position: 40px 0; }
+}
+
+@keyframes progress
+{
+  to { background-position: 40px 0; }
+}
+
+div[id^=idmnotifier].persist:not(.update) p
+{
+  -webkit-animation: progress 1s linear infinite !important;
+  -moz-animation: progress 1s linear infinite !important;
+  animation: progress 1s linear infinite !important;
+  background-repeat: repeat !important;
+  background-size: 40px 40px !important;
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent) !important;
+}
+
+div[id^=idmnotifier] em
+{
+  font-style: normal;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+div[id^=idmnotifier] em:not(:empty)::after
+{
+  content: '!';
+  padding-right: 1em;
+}
+
+div[id^=idmnotifier].detached ins
+{
+  top: -100px;
+  left: 50%;
+  right: unset;
+  width: unset;
+  opacity: 0;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  transform: none;
+  clip-path: unset;
+}
+
+div[id^=idmnotifier].detached ins > p
+{
+  position: unset;
+  border: 3px solid white;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+div[id^=idmnotifier].active ins
+{
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+div[id^=idmnotifier].detached.active ins
+{
+  top: 30px;
+  opacity: 1;
+}
+
+div[id^=idmnotifier].active ins > p
+{
+  top: 0;
+}
+
+div[id^=idmnotifier].detached.update ins
+{
+  -webkit-transform: rotateX(360deg);
+  -moz-transform: rotateX(360deg);
+  -ms-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+}
+
+div[id^=idmnotifier].updated ins
+{
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+
+div[id^=idmnotifier].detached ins:not([style*=width])
+{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  transition: none;
+}
+
+div[id^=idmnotifier] aside
+{
+  position: fixed;
+  z-index: 2147483147;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: unset;
+  padding: unset;
+  width: auto;
+  text-align: center;
+  clip-path: inset(0px 0px 0px 0px);
+  max-height: 50%;
+  overflow-y: auto;
+}
+
+div[id^=idmnotifier] aside:hover
+{
+  border-bottom: 1px solid black;
+}
+
+div[id^=idmnotifier] aside > div
+{
+  position: relative;
+  top: -100px;
+  width: 100%;
+  background: whitesmoke;
+  border-bottom: 1px solid black;
+  opacity: 0;
+  transition: all 200ms ease-in;
+}
+
+div[id^=idmnotifier].log aside > div
+{
+  top: 0;
+  opacity: 1;
+  transition: all 200ms ease-out;
+}
+
+div[id^=idmnotifier] aside table
+{
+  width: inherit;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+div[id^=idmnotifier] aside table tr:nth-child(odd)
+{
+  background-color: rgba(120, 110, 100, 0.1);
+}
+
+div[id^=idmnotifier] aside table tr:hover
+{
+  background: #fefe88;
+}
+
+div[id^=idmnotifier] aside table tr td
+{
+  width: 5%;
+  margin: unset;
+  padding: 0.3em 1em;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  border-radius: unset;
+}
+
+div[id^=idmnotifier] aside table tr td:last-of-type
+{
+  width: 80%;
+  padding-right: 2em;
+  white-space: normal;
+  text-align: left;
+}
+
+div[id^=idmnotifier] aside table tr td.error
+{
+  background-color: red;
+  color: black;
+  font-variant: small-caps;
+}
+
+div[id^=idmnotifier] aside table tr td.alert
+{
+  background-color: #0094d1;
+  color: white;
+  font-variant: small-caps;
+}
+
+div[id^=idmnotifier] aside table tr td.warning
+{
+  background-color: #fcd209;
+  color: black;
+  font-variant: small-caps;
+}
+
+div[id^=idmnotifier] aside table tr td.success
+{
+  background-color: #00bb55;
+  color: white;
+  font-variant: small-caps;
+}

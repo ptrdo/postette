@@ -1,0 +1,24 @@
+{
+  "name": "postette",
+  "version": "v0.1.0",
+  "description": "A Mechanism for Communicating Remarkable Events to a Person Interacting with a Web Client",
+  "homepage": "https://github.com/ptrdo/postette#readme",
+  "main": "",
+  "files": [
+    "postette.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptrdo/postette.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ptrdo/postette/issues"
+  },
+  "authors": [
+    "Peter Sylwester <peter.sylwester@gmail.com>"
+  ],
+  "license": "CC-BY-NC-SA-4.0"
+}
