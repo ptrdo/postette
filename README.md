@@ -1,6 +1,6 @@
-###### This is released software. Please **[log issues](https://github.com/ptrdo/postette/issues)** found.
+###### This is pre-release software, but please **[log issues](https://github.com/ptrdo/postette/issues)** found.
 # Postette
-A gadget for communicating remarkable events to a person interacting with a web client.
+A zero-dependency gadget for the management and execution of notifications to a person interacting with a web client application.
 ### The Gist
 This JavaScript module, [postette.js](postette.js), should allow a web client to communicate important information to a person interacting with it, including alerts, warnings, and errors. Communicating important events to the person interacting with a web client is friendly and conducive to better usability. 
 
@@ -33,7 +33,7 @@ window.postette.notify("Done!", { level:"success", delay:-1 }); // cancels a per
 **4:** Requests to a REST service produce results that will be interesting to the person interacting with a web client. This notification system provides a simple means to pass the Request's Response Object, parsing any message provided by the service, but then communicating a backup message when nothing is found.
 ```javascript
 var request = new XMLHttpRequest();
-request.open("GET", "https:/comps-dev.idmod.org/api/users?format=json", true);
+request.open("GET", "https:/some.domain.org/api/users?format=json", true);
 request.onreadystatechange = function() {
     if (request.readyState === 4) {
         if (request.status === 200) {
@@ -87,16 +87,16 @@ success Saved package.json
 }
 ```
 
-**4:** Now, add the latest COMPS-UI release to the project. Note: A prompt may ask for credentials to the IDM respository.
+**4:** Now, add the latest Postette release to the project.
 ```sh
-> yarn add "postette"
+> yarn add postette
 ```
 
 **5:** The result should be a new folder at the root of the project named "**node_modules**" and populated with a folder named "**postette**" containing the contents of the latest release.
 
 **6:** As there are new releases, update the project to the latest version. Note: the `upgrade` can also be made globally to all packages in the project by not specifying a package.
 ```sh
-> yarn upgrade "postette" --latest
+> yarn upgrade postette --latest
 ```
 **NOTE:** If problems are encountered with the `add` and `upgrade` procedures detailed above, please be certain to update all associated softwares, including `yarn`, `npm`, and `git` (especially [Git for Windows](https://git-scm.com/download/win)), before investigating other remedies.
 
@@ -125,7 +125,7 @@ This supplies the code with any customizing parameters necessary for the particu
 | `prefix` | *Boolean* | `true` | When true, renders the level preceding message (e.g. "404 Not found." becomes "Error! 404 Not found."). |
 | `integration` | *Boolean or null* | `null` | Always integrate when true, never when false, or automatic when null. A boolean value overrides [Notify Option](#notify-options) |
 | `tldr` | *Integer* | `72` | Too Long, Didn't Read is the minimum message length for defaulting to `integrate:true` (when integration is automatic). |
-| `modalSelector` | *Array* | `["[id^=idmauth].active"]` | Array of querySelector-compliant string(s) of DOM element(s) which would be incompatible with an integrated message. |
+| `modalSelector` | *Array* | `["[id^=modal].active"]` | Array of querySelector-compliant string(s) of DOM element(s) which would be incompatible with an integrated message. |
 | `zIndex` | *Integer* | `2147483647-100` | Prescribes relative layering of the messaging element via CSS z-index. Default is `100` less than the maximum possible value. |
 | `zIndexLog` | *Integer* | `2147483647-500` | Prescribes relative layering of the log (print) element via CSS z-index. Default is `500` less than the maximum possible value. |
 | `top` | *String* | `"50px"` | Value attributable to CSS top (in sanctioned units, e/g "px", "rem", "%"). Integer-only value will be set as "px". |
@@ -144,7 +144,7 @@ Postette.notify("An Immediate Warning!", { level:"warning", delay: -1, pause: "a
 
 ````
 
-See the [Notify Options](#notify-options) or the [code documentation](https://github.com/InstituteforDiseaseModeling/COMPS-UI/blob/master/notifier/postette.js) for more explanation and additional public methods.
+See the [Notify Options](#notify-options) or the [code documentation](postette.js) for more explanation and additional public methods.
 
 | Method Name | Argument(s) | Description |
 |-------------|-------------|-------------|
@@ -260,7 +260,7 @@ The Postette element is appended to the DOM and given a unique ID prefixed with 
  }
 ```
 
-**Library Integration**
+**Application Integration**
 Components created for a web client may only have implied coordination. This means that sometimes they must be configured to cooperate because they aren't preconfigured that way. For instance, if the Postette log should not persist between sessions, this can be accomplished by clearing the Postette log via a listener assigned to another component's event.
 ```javascript
 MyAuthLib.addEventListener("signout", "myApplication", function() {

@@ -3,7 +3,7 @@
 
   /**
    * POSTETTE
-   * A gadget for communicating remarkable events to a person interacting with a web client.
+   * A zero-dependency gadget for the management and execution of notifications to a person interacting with a web client application.
    *
    * @license MIT
    * @requires "HTML5", "ECMA-262 Edition 5.1"

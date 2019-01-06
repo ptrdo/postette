@@ -1,7 +1,7 @@
 {
   "name": "postette",
   "version": "v0.1.0",
-  "description": "A Mechanism for Communicating Remarkable Events to a Person Interacting with a Web Client",
+  "description": "A zero-dependency gadget for the management and execution of notifications to a person interacting with a web client application.",
   "homepage": "https://github.com/ptrdo/postette#readme",
   "main": "",
   "files": [
