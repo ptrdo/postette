@@ -148,8 +148,6 @@ See the [Notify Options](#notify-options) or the [code documentation](https://gi
 
 | Method Name | Argument(s) | Description |
 |-------------|-------------|-------------|
-| `toast` | message, level, pause, delay, callback | Provides backwards compatibility to the original iteration of this component. Going forward, use the method, `notify();` |
-| `toastOnce` | message, level, pause, delay, callback | Provides backwards compatibility to the original iteration of this component. Going forward, use the notify option, `{ once:true }`. |
 | `notify` | message, options, callback | The primary, general purpose method for generating a notification. See the full complement of [Notify Options](#notify-options). |
 | `alert` | response, alternative | Convenience method for "alert" level notification. The first argument can be an XHR Response Object or a message String. The second argument is an alternative if a ResponseMessage is not found within the Response Object argument.  |
 | `warning` | response, alternative | Convenience method for "warning" level notification. |
