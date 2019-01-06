@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="revised" content="2019/01/03">
+  <meta name="revised" content="2019/01/06">
   <title>Postette: Simple</title>
   <style>
     @import url(//fonts.googleapis.com/css?family=Roboto:400,700);
-    html,body {
+    html,body,* {
       font-family: "Roboto", "Calibri", sans-serif;
       font-weight: normal;
       font-size: 100%;
@@ -72,7 +72,7 @@
     {
       width: 20%;
       min-width: 21rem;
-      margin: 4rem auto;
+      margin: 3rem auto;
       text-align: left;
     }
     form[action=demo] fieldset
@@ -82,6 +82,10 @@
       padding: 1rem;
       margin: 0;
       box-sizing: border-box;
+    }
+    form[action=demo] label
+    {
+      color: darkorange;
     }
     form[action=demo] input,
     form[action=demo] select,
@@ -100,6 +104,8 @@
     form[action=demo] input[type=reset],
     form[action=demo] input[type=submit] {
       cursor: pointer;
+      background: darkorange;
+      color: white;
     }
     form[action=demo] input[type=checkbox] {
       display: inline;
@@ -120,13 +126,13 @@
 
     /* CUSTOM LEVEL DEMONSTRATION */
 
-    div[id^=idmnotifier].custom p
+    div[id^=postette].custom p
     {
       background-color: pink;
       color: black !important;
     }
 
-    div[id^=idmnotifier] aside table tr td.custom {
+    div[id^=postette] aside table tr td.custom {
       background-color: pink;
       color: black;
       font-variant: small-caps;
@@ -151,7 +157,7 @@
     <section>
       <form action="demo" spellcheck="false" autocomplete="off">
         <fieldset>
-          <legend>Make Postette!</legend>
+          <legend>Try Postette!</legend>
           <label>Message</label>
           <textarea name="message" title="say something" rows="3" wrap="soft" placeholder="a message" required="required" tabindex="0">Hello World!</textarea>
           <label>Level</label>
@@ -173,7 +179,7 @@
           <input type="number" name="pause" value="3000" placeholder="milliseconds" pattern="\d*" step="1000" min="0" max="10000" required="required" tabindex="0">
           <label><input type="checkbox" name="persist"/>Infinity (spinner)</label>
           <hr/>
-          <input type="submit" value="Toast!" title="Send a Message" tabindex="0">
+          <input type="submit" value="Notify!" title="Send a Message" tabindex="0">
           <input type="reset" value="Reset" title="Reset This Form" tabindex="0">
         </fieldset>
       </form>
@@ -235,10 +241,10 @@
 
   function render(rootElement) {
     $("#header > button[name=signout]")
-    .prop("disabled", !comps)
     .on("click", function(event) {
       event.preventDefault();
       event.stopPropagation();
+      Postette.alert("Attach to authentication routines here!")
     });
     $("#header > button[name=log]").on("click", function(event) {
       event.preventDefault();

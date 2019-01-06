@@ -1,10 +1,10 @@
 ###### This is released software. Please **[log issues](https://github.com/ptrdo/postette/issues)** found.
 # Postette
-A Mechanism for Communicating Remarkable Events to a Person Interacting with a Web Client.
+A gadget for communicating remarkable events to a person interacting with a web client.
 ### The Gist
-This JavaScript module, [postette.js](postette.js), should allow a web client to communicate important information to a person interacting with it, including alerts, warnings, and errors. Communicating important events to the person interacting with a web client is conducive to better usability. 
+This JavaScript module, [postette.js](postette.js), should allow a web client to communicate important information to a person interacting with it, including alerts, warnings, and errors. Communicating important events to the person interacting with a web client is friendly and conducive to better usability. 
 
-This is the same JavaScript code implemented in the COMPS Web Client and so should be sufficient for communicating consistently and effectively in a variety of circumstances. Included within this code is required user interface (HTML) and styles (CSS) which are unobtrusively appended to any HTML document. A simple example is provided (see [the examples](/tree/master/postette/example)).
+Included within this zero-dependency code is the required user interface (HTML) and styles (CSS) which are unobtrusively appended to any HTML document. A simple example is provided (see [the examples](/tree/master/postette/example)).
 
 ***
 ![A Postette message.](example/postette.png)
@@ -50,7 +50,7 @@ request.send();
 ### Installation
 While it is possible to simply clone or download this repository and drag the code into a project, it is recommended to use a package manager to maintain version control and facilitate keeping dependent projects current with the latest changes. This is critical software that should be expected to change, and the most-current version is the only version to guarantee access into the COMPS system.
 
-[Yarn](https://yarnpkg.com/) is an excellent choice for managing packages for web clients and can be [installed a variety of ways](https://yarnpkg.com/en/docs/install). One important advantage of Yarn over similar tools like Node Package Manager ([NPM](https://www.npmjs.com/get-npm)) is that private repositories (like this one) can be installed without requiring a public registry. Note that access to IDM's GitHub private repository is required.
+[Yarn](https://yarnpkg.com/) is an excellent choice for managing packages for web clients and can be [installed a variety of ways](https://yarnpkg.com/en/docs/install). One important advantage of Yarn over similar tools like Node Package Manager ([NPM](https://www.npmjs.com/get-npm)) is that private repositories (like this one) can be installed without requiring a public registry. 
 
 **1:** From a command prompt, navigate to the project path where this module should be installed.
 ```sh
@@ -62,9 +62,9 @@ While it is possible to simply clone or download this repository and drag the co
 > yarn init
 > question name (myProject): your-project-name
 > question version (1.0.0):
-> question description: Practicing the COMPS UI.
+> question description: Practicing the Postette.
 > question entry point (index.js):
-> question git repository: https://github.com/InstituteforDiseaseModeling/my-project-name
+> question git repository: https://github.com/my-account/my-project-name
 > question author: My Name Here
 > question license (MIT):
 > question private:
@@ -76,10 +76,10 @@ success Saved package.json
 {
   "name": "my-project-name",
   "version": "1.0.0",
-  "description": "Practicing the COMPS UI.",
+  "description": "Practicing the Postette.",
   "main": "index.js",
   "repository": {
-    "url": "https://github.com/InstituteforDiseaseModeling/my-project-name",
+    "url": "https://github.com/my-account/my-project-name",
     "type": "git"
   },
   "author": "My Name Here",
@@ -89,14 +89,14 @@ success Saved package.json
 
 **4:** Now, add the latest COMPS-UI release to the project. Note: A prompt may ask for credentials to the IDM respository.
 ```sh
-> yarn add "git+http://github.com/InstituteforDiseaseModeling/COMPS-UI.git#latest"
+> yarn add "postette"
 ```
 
-**5:** The result should be a new folder at the root of the project named "**node_modules**" and populated with a folder named "**COMPS-UI**" containing the contents of the latest release.
+**5:** The result should be a new folder at the root of the project named "**node_modules**" and populated with a folder named "**postette**" containing the contents of the latest release.
 
-**6:** As there are new releases, update the project to the latest version. Note: the `upgrade` can also be made globally to all packages in the project by not specifying the package, `COMPS-UI-Auth.git`.
+**6:** As there are new releases, update the project to the latest version. Note: the `upgrade` can also be made globally to all packages in the project by not specifying a package.
 ```sh
-> yarn upgrade "git+http://github.com/InstituteforDiseaseModeling/COMPS-UI.git" --latest
+> yarn upgrade "postette" --latest
 ```
 **NOTE:** If problems are encountered with the `add` and `upgrade` procedures detailed above, please be certain to update all associated softwares, including `yarn`, `npm`, and `git` (especially [Git for Windows](https://git-scm.com/download/win)), before investigating other remedies.
 
@@ -262,19 +262,19 @@ The Postette element is appended to the DOM and given a unique ID prefixed with 
  }
 ```
 
-**COMPS-Auth Integration**
-Components created for the COMPS web client only have implied coordination. This means that sometimes they must be configured to cooperate because they aren't preconfigured that way. For instance, if the Postette log should not persist between sessions, this can be accomplished by clearing the Postette log via a listener assigned to an Auth event.
+**Library Integration**
+Components created for a web client may only have implied coordination. This means that sometimes they must be configured to cooperate because they aren't preconfigured that way. For instance, if the Postette log should not persist between sessions, this can be accomplished by clearing the Postette log via a listener assigned to another component's event.
 ```javascript
-Auth.addEventListener("signout", "myApplication", function() {
+MyAuthLib.addEventListener("signout", "myApplication", function() {
   Postette.clearHistory();
 });
 ```
 
 **Page Integration**
-Components created for the COMPS web client only have implied coordination with document interaction. This means that sometimes they must be configured to cooperate because they aren't preconfigured that way. For instance, if the Postette log should be closed upon a click-away, then the document is responsible for this behavior.
+Components created for a web client only have implied coordination with document interaction. This means that sometimes they must be configured to cooperate because they aren't preconfigured that way. For instance, if the Postette log should be closed upon a click-away, then the document is responsible for this behavior.
 ```javascript
 document.body.addEventListener("click", function(event) {
-// assuming Notifer.getConfig().clickAway === true;
+// assuming Postette.getConfig().clickAway === true;
    Postette.globalClickHandler(event);
 });
 ```
