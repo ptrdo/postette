@@ -48,7 +48,7 @@ request.send();
 
 ***
 ### Installation
-While it is possible to simply clone or download this repository and drag the code into a project, it is recommended to use a package manager to maintain version control and facilitate keeping dependent projects current with the latest changes. This is critical software that should be expected to change, and the most-current version is the only version to guarantee access into the COMPS system.
+While it is possible to simply clone or download this repository and drag the code into a project, it is recommended to use a package manager to maintain version control and facilitate keeping dependent projects current with the latest changes.
 
 [Yarn](https://yarnpkg.com/) is an excellent choice for managing packages for web clients and can be [installed a variety of ways](https://yarnpkg.com/en/docs/install). One important advantage of Yarn over similar tools like Node Package Manager ([NPM](https://www.npmjs.com/get-npm)) is that private repositories (like this one) can be installed without requiring a public registry. 
 

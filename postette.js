@@ -3,7 +3,7 @@
 
   /**
    * POSTETTE
-   * Mechanism for Communicating Remarkable Events to the Person Interacting with a Web Client.
+   * A gadget for communicating remarkable events to a person interacting with a web client.
    *
    * @license MIT
    * @requires "HTML5", "ECMA-262 Edition 5.1"
@@ -51,7 +51,7 @@
       "use strict";
 
       /**
-       * postette is singleton class for management and execution of notifications to the person interacting with the application.
+       * Postette is singleton class for management and execution of notifications to the person interacting with a web client application.
        * Notifications are queued, so every one will show subsequent to any previous one(s) that may be in process.
        *
        * Note: No dependencies here since user may need to be notified of application failures.
@@ -268,6 +268,7 @@
       var queryUser = function () {
         var result = "unknown-user";
         try {
+          /* When authentication routines are present, here would be where they are called. */
           result = markupId;
         } catch (err) {
           console.warn(identity, "queryUser:", "A user was expected but not found.", err);
@@ -1325,54 +1326,6 @@
         close: function() {
           clickHandler();
           undoLog();
-        },
-
-        /**
-         * toast provides backwards-compatibility to the original iteration of this component.
-         * @todo deprecate, now implemented as notify().
-         *
-         * @public
-         * @param {String} message
-         * @param {String} type
-         * @param {Number|String} pause
-         * @param {Number|String} delay
-         * @param {Function} callback
-         */
-        toast: function(message, level, pause, delay, callback) {
-          var options = {
-            level: level !== undefined && !(level instanceof Function) ? level : LEVEL.alert,
-            pause: pause !== undefined && !(pause instanceof Function) ? pause : TIME.moderate,
-            delay: delay !== undefined && !(delay instanceof Function) ? delay : TIME.minimal,
-            callback: (arguments[arguments.length - 1] instanceof Function) ? callback : function(){}
-          };
-          toast(message, options);
-        },
-
-        /**
-         * toastOnce will preempt any message previously delivered to the current user.
-         * @todo deprecate, now implemented as notify option, { once:true }.
-         *
-         * @public
-         * @see this.toast() for full argument profile.
-         * @returns {Boolean} true when messaging, false when previously messaged.
-         */
-        toastOnce: function (message, level, pause, delay, callback) {
-          var messaged = false;
-          var user = "";
-          try {
-            user = queryUser();
-          } catch (e) { }
-          collection.forEach(function (item) {
-            if (item.message === message && item.level === level && item.user === user) {
-              messaged = true;
-            }
-          });
-          if (!messaged) {
-            this.toast(message, level, pause, delay, callback);
-            return true;
-          } else {
-            return false;
-          }
         },
 
         /**
