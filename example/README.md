@@ -2,7 +2,7 @@
 # Example of postette.js
 Sample implementation demonstrating Postette for the management and execution of notifications to a person interacting with a web client application.
 
-Run this HTML document, [notifier.html](notifier.html), in a web browser. A web server (or localhost) is required for demonstrating complete functionality.
+Run this HTML document, [postette.html](postette.html), in a web browser. A web server (or localhost) is required for demonstrating complete functionality.
 
 ***
 ### Installation
@@ -12,12 +12,7 @@ While it is possible to simply clone or download this repository and drag the co
 
 **1:** From a command prompt, navigate to the path where this example directory has been installed.
 ```sh
-> cd C:\path\to\example
+> cd path/to/postette/example
 ```
 
-**2:** The `package.json` at contains the necessary parameters for what is required, so simply run Yarn (entry of credentials may be required):
-```sh
-> yarn
-```
-
-**3:** There should now be a `node_modules` directory within the example directory. The example file, `notifier.html`, has been pre-configured to load the necessary resources from there, so simply run the file via a web server for demonstration. (HINT: An IDE such as [Eclipse](http://www.eclipse.org/downloads/eclipse-packages/), or [Jet Brain's IDEA or WebStorm](https://www.jetbrains.com/idea/) would be a fine choice).
+**2:** The example file, `postette.html`, has been pre-configured to load all necessary resources from there, so simply run the file via a web server for demonstration. (HINT: An IDE such as [Eclipse](http://www.eclipse.org/downloads/eclipse-packages/), or [Jet Brain's IDEA or WebStorm](https://www.jetbrains.com/idea/) would be a fine choice).
