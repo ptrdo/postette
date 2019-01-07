@@ -2,8 +2,8 @@
 
 /**
  * Postette, Rendered Styles
- * This stylesheet is direct result of default parse and append of idmorg-notifier.js
- * The parentElement's dynamic id attribute value has been substituted here with the selector, div[id^=idmnotifier]
+ * This stylesheet is direct result of default parse and append of postette.js
+ * The parentElement's dynamic id attribute value has been substituted here with the selector, div[id^=postette]
  * It may be convenient to attach this stylesheet to example HTML instead of dynamic append whenever modifying styles.
  *
  * @author peter(dot)sylwester(at)gmail(dot)com
@@ -14,7 +14,7 @@
 
 /* POSTETTE */
 
-div[id^=idmnotifier] ins
+div[id^=postette] ins
 {
   position: fixed;
   z-index: 2147483547;
@@ -34,7 +34,7 @@ div[id^=idmnotifier] ins
   clip-path: inset(0px 0px 0px 0px);
 }
 
-div[id^=idmnotifier] ins p
+div[id^=postette] ins p
 {
   position: relative;
   display: inline-block;
@@ -59,37 +59,37 @@ div[id^=idmnotifier] ins p
   transition: all 400ms ease;
 }
 
-div[id^=idmnotifier] ins p span
+div[id^=postette] ins p span
 {
   display: inline-block;
   max-width: 50em;
 }
 
-div[id^=idmnotifier].error p
+div[id^=postette].error p
 {
   background-color: red;
   color: white;
 }
 
-div[id^=idmnotifier].alert p
+div[id^=postette].alert p
 {
   background-color: #0094d1;
   color: white;
 }
 
-div[id^=idmnotifier].warning p
+div[id^=postette].warning p
 {
   background-color: #fcd209;
   color: black;
 }
 
-div[id^=idmnotifier].success p
+div[id^=postette].success p
 {
   background-color: #00bb55;
   color: white;
 }
 
-div[id^=idmnotifier] button
+div[id^=postette] button
 {
   float: right;
   margin: 0;
@@ -106,17 +106,17 @@ div[id^=idmnotifier] button
   outline: none;
 }
 
-div[id^=idmnotifier] button:hover
+div[id^=postette] button:hover
 {
   color: white;
 }
 
-div[id^=idmnotifier] button:active
+div[id^=postette] button:active
 {
   color: black;
 }
 
-div[id^=idmnotifier].persist button
+div[id^=postette].persist button
 {
   visibility: hidden;
 }
@@ -136,7 +136,7 @@ div[id^=idmnotifier].persist button
   to { background-position: 40px 0; }
 }
 
-div[id^=idmnotifier].persist:not(.update) p
+div[id^=postette].persist:not(.update) p
 {
   -webkit-animation: progress 1s linear infinite !important;
   -moz-animation: progress 1s linear infinite !important;
@@ -146,20 +146,20 @@ div[id^=idmnotifier].persist:not(.update) p
   background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent) !important;
 }
 
-div[id^=idmnotifier] em
+div[id^=postette] em
 {
   font-style: normal;
   font-weight: bold;
   text-transform: capitalize;
 }
 
-div[id^=idmnotifier] em:not(:empty)::after
+div[id^=postette] em:not(:empty)::after
 {
   content: '!';
   padding-right: 1em;
 }
 
-div[id^=idmnotifier].detached ins
+div[id^=postette].detached ins
 {
   top: -100px;
   left: 50%;
@@ -173,7 +173,7 @@ div[id^=idmnotifier].detached ins
   clip-path: unset;
 }
 
-div[id^=idmnotifier].detached ins > p
+div[id^=postette].detached ins > p
 {
   position: unset;
   border: 3px solid white;
@@ -186,7 +186,7 @@ div[id^=idmnotifier].detached ins > p
   box-sizing: content-box;
 }
 
-div[id^=idmnotifier].active ins
+div[id^=postette].active ins
 {
   -webkit-transform: rotateX(0deg);
   -moz-transform: rotateX(0deg);
@@ -198,18 +198,18 @@ div[id^=idmnotifier].active ins
   transition: all 300ms ease;
 }
 
-div[id^=idmnotifier].detached.active ins
+div[id^=postette].detached.active ins
 {
   top: 30px;
   opacity: 1;
 }
 
-div[id^=idmnotifier].active ins > p
+div[id^=postette].active ins > p
 {
   top: 0;
 }
 
-div[id^=idmnotifier].detached.update ins
+div[id^=postette].detached.update ins
 {
   -webkit-transform: rotateX(360deg);
   -moz-transform: rotateX(360deg);
@@ -217,7 +217,7 @@ div[id^=idmnotifier].detached.update ins
   transform: rotateX(360deg);
 }
 
-div[id^=idmnotifier].updated ins
+div[id^=postette].updated ins
 {
   -webkit-transform: rotateX(0deg);
   -moz-transform: rotateX(0deg);
@@ -225,7 +225,7 @@ div[id^=idmnotifier].updated ins
   transform: rotateX(0deg);
 }
 
-div[id^=idmnotifier].detached ins:not([style*=width])
+div[id^=postette].detached ins:not([style*=width])
 {
   -webkit-transition: none;
   -moz-transition: none;
@@ -233,7 +233,7 @@ div[id^=idmnotifier].detached ins:not([style*=width])
   transition: none;
 }
 
-div[id^=idmnotifier] aside
+div[id^=postette] aside
 {
   position: fixed;
   z-index: 2147483147;
@@ -249,12 +249,12 @@ div[id^=idmnotifier] aside
   overflow-y: auto;
 }
 
-div[id^=idmnotifier] aside:hover
+div[id^=postette] aside:hover
 {
   border-bottom: 1px solid black;
 }
 
-div[id^=idmnotifier] aside > div
+div[id^=postette] aside > div
 {
   position: relative;
   top: -100px;
@@ -265,31 +265,31 @@ div[id^=idmnotifier] aside > div
   transition: all 200ms ease-in;
 }
 
-div[id^=idmnotifier].log aside > div
+div[id^=postette].log aside > div
 {
   top: 0;
   opacity: 1;
   transition: all 200ms ease-out;
 }
 
-div[id^=idmnotifier] aside table
+div[id^=postette] aside table
 {
   width: inherit;
   border-collapse: separate;
   border-spacing: 2px;
 }
 
-div[id^=idmnotifier] aside table tr:nth-child(odd)
+div[id^=postette] aside table tr:nth-child(odd)
 {
   background-color: rgba(120, 110, 100, 0.1);
 }
 
-div[id^=idmnotifier] aside table tr:hover
+div[id^=postette] aside table tr:hover
 {
   background: #fefe88;
 }
 
-div[id^=idmnotifier] aside table tr td
+div[id^=postette] aside table tr td
 {
   width: 5%;
   margin: unset;
@@ -300,7 +300,7 @@ div[id^=idmnotifier] aside table tr td
   border-radius: unset;
 }
 
-div[id^=idmnotifier] aside table tr td:last-of-type
+div[id^=postette] aside table tr td:last-of-type
 {
   width: 80%;
   padding-right: 2em;
@@ -308,28 +308,28 @@ div[id^=idmnotifier] aside table tr td:last-of-type
   text-align: left;
 }
 
-div[id^=idmnotifier] aside table tr td.error
+div[id^=postette] aside table tr td.error
 {
   background-color: red;
   color: black;
   font-variant: small-caps;
 }
 
-div[id^=idmnotifier] aside table tr td.alert
+div[id^=postette] aside table tr td.alert
 {
   background-color: #0094d1;
   color: white;
   font-variant: small-caps;
 }
 
-div[id^=idmnotifier] aside table tr td.warning
+div[id^=postette] aside table tr td.warning
 {
   background-color: #fcd209;
   color: black;
   font-variant: small-caps;
 }
 
-div[id^=idmnotifier] aside table tr td.success
+div[id^=postette] aside table tr td.success
 {
   background-color: #00bb55;
   color: white;
