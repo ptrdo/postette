@@ -21,7 +21,7 @@
    * AMD IMPLEMENTATION (RequireJS):
    *
    *   require.config({
-   *     paths: { postette: "/path/to/postette"},
+   *     paths: { postette: "path/to/postette"},
    *     shim: { postette: { exports: "postette" }}
    *   });
    *
@@ -75,7 +75,7 @@
        * @property {Element} clickerElement // the currently rendered BUTTON (to dismiss).
        */
 
-      var version = "0.1.0",
+      var version = "0.2.0",
           identity = "postette",
           markupId = identity + Date.now(),
           queue = [],

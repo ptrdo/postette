@@ -1,6 +1,6 @@
 {
   "name": "postette",
-  "version": "v0.1.0",
+  "version": "v0.2.0",
   "description": "A zero-dependency gadget for the management and execution of notifications to a person interacting with a web client application.",
   "homepage": "https://github.com/ptrdo/postette#readme",
   "main": "",
