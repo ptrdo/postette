@@ -155,6 +155,7 @@ See the [Notify Options](#notify-options) or the [code documentation](postette.j
 | `success` | response, alternative | Convenience method for "success" level notification. |
 | `spinner` | response, alternative | Convenience method for "persist" level notification (indefinite). |
 | `done` | response, alternative | Convenience method for "update" level notification (stops spinner with message). |
+| `dismiss` | none | Remotely ends a current notification without message (same result as click-to-close or click-away). |
 | `setCustomLevel` | name | Adds a level of notification message ([CSS overrides](#advanced-usage) will be required for styling). |
 | `setComputeFactor` | value | Sets a per-character multiplier for computing pause-enough for a message to be read. The default is `100` (milliseconds). |
 | `setClickAway` | boolean | When true, `globalClickHandler();` will quit messages and close the log upon firing. |

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="revised" content="2019/01/07">
+  <meta name="revised" content="2019/06/18">
   <title>Postette: Example</title>
   <style>
     @import url(//fonts.googleapis.com/css?family=Roboto:400,700);
@@ -107,6 +107,21 @@
       background: darkorange;
       color: white;
     }
+    form[action=demo] input[type=reset]:active,
+    form[action=demo] input[type=submit]:active {
+      background: saddlebrown;
+      color: silver;
+    }
+    form[action=demo] input[type=button] {
+      cursor: pointer;
+      background: lightgoldenrodyellow;
+      color: darkorange;
+    }
+    form[action=demo] input[type=button]:active {
+      cursor: pointer;
+      background: goldenrod;
+      color: whitesmoke;
+    }
     form[action=demo] input[type=checkbox] {
       display: inline;
       width: auto;
@@ -180,6 +195,7 @@
           <label><input type="checkbox" name="persist"/>Infinity (spinner)</label>
           <hr/>
           <input type="submit" value="Notify!" title="Send a Message" tabindex="0">
+          <input type="button" value="Dismiss" title="End a Message" tabindex="0">
           <input type="reset" value="Reset" title="Reset This Form" tabindex="0">
         </fieldset>
       </form>
@@ -266,6 +282,11 @@
       Postette.log();
     });
     $("form[action=demo]").on("submit", notify);
+    $("form input[value=Dismiss]").on("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      Postette.dismiss();
+    });
 
     $("form").on("click", function(event) {
        event.stopPropagation();

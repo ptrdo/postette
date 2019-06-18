@@ -1,6 +1,6 @@
 {
   "name": "postette-example",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Sample implementation demonstrating Postette for the management and execution of notifications to a person interacting with a web client application.",
   "main": "postette.html",
   "repository": "https://github.com/ptrdo/postette.git",

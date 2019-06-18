@@ -75,7 +75,7 @@
        * @property {Element} clickerElement // the currently rendered BUTTON (to dismiss).
        */
 
-      var version = "0.2.0",
+      var version = "0.3.0",
           identity = "postette",
           markupId = identity + Date.now(),
           queue = [],
@@ -396,6 +396,7 @@
         clearClassList(element, STATE.active);
 
         timerDone = setTimeout(function () {
+          clearClassList(element, STATE);
           try {
             if (queue.length > 0) {
               execute(queue.pop());
@@ -1408,6 +1409,14 @@
         spinner: function(response, alternative) {
           toaster(response, alternative, STATE.persist);
         },
+
+        /**
+         * dismiss remotely triggers the click event, essentially dismissing the current message.
+         * any queued messages will display as would be expected.
+         *
+         * @public
+         */
+        dismiss: clickHandler,
 
         /**
          * update (or done) is a convenience method to create a toast of state:update.
