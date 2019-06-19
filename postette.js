@@ -75,7 +75,7 @@
        * @property {Element} clickerElement // the currently rendered BUTTON (to dismiss).
        */
 
-      var version = "0.3.0",
+      var version = "0.4.0",
           identity = "postette",
           markupId = identity + Date.now(),
           queue = [],
@@ -102,9 +102,12 @@
        * @property {Integer} zIndex // relative display layer as defined by CSS z-index property (default is 100 less than DOM maximum).
        * @property {Integer} zIndexLog // relative display layer as defined by CSS z-index property (default is 300 less than DOM maximum).
        * @property {String} top // value attributable to CSS top (in sanctioned units, e/g "px", "rem", "%"). Integers will be set as "px".
+       * @property {Integer} transition // the shortcut value for reveal/retreat of notification.
+       * @property {Integer} transitionBuffered // the shortcut value for transitions incorporating DOM manipulation (reconfiguring the notification).
        * @property {Boolean} downwards // when true, notifications animate downwards into view, elsewise upwards. @todo
        * @property {Element} parentElement // node to which element is appended (if null, then document.body will bet set).
        * @property {Element} clickAway // enables this.globalClickHandler to quit message/log upon click that bubbles to document.body.
+       * @setter {Function} transitionComponent // builds transition shortcuts with supplied duration miliseconds or timing-function keyword.
        */
       var ZMAX = 2147483647; /* CSS: Maximum value for z-index property of absolute-positioned DOM element. */
       var CONFIG = {
@@ -118,9 +121,22 @@
         zIndex: ZMAX-100,
         zIndexLog: ZMAX-500,
         top: "50px",
+        transition: "all 300ms ease",
+        transitionBuffered: "all 400ms ease",
         downwards: true,
         parentElement: null,
-        clickAway: true
+        clickAway: true,
+        set transitionComponent (value) {
+          if (/\d+/.test(value)) {
+            // transitionMilliseconds
+            this.transition = this.transition.replace(/\d+ms?/, value == 0 ? 0 : value + "ms");
+            this.transitionBuffered = this.transitionBuffered.replace(/\d+ms?/, (value + TIME.buffer) + "ms");
+          } else {
+            // transitionEasing
+            this.transition = this.transition.replace(/\b([a-z\-]+)$/, value);
+            this.transitionBuffered = this.transitionBuffered.replace(/\b([a-z\-]+)$/, value);
+          }
+        }
       };
 
       /**
@@ -170,7 +186,8 @@
        * @property ample // time required for a person to be impeded by a message.
        * @property persisting // time given to a "persist" message (seemingly fixed, a spinner).
        * @property perCharacterFactor // computes sufficient duration to read an indeterminate message.
-       * @property transition // time configured for CSS transition-duration.
+       * @property transition // time allowed for CSS transition-duration (reconfigurable via CONFIG.transitionMilliseconds).
+       * @property buffer // minimum time allowed for DOM manipulation (reconfigure of message element).
        */
       var TIME = {
         immediate: 300,
@@ -180,7 +197,8 @@
         ample: 8000,
         persisting: 1000 * 60 * 60,
         perCharacterFactor: 100,
-        transition: 300
+        transition: 300,
+        buffer: 100
       };
 
       /**
@@ -655,7 +673,7 @@
             "-moz-transform": "none",
             "-ms-transform": "none",
             "transform": "none",
-            "transition": "all 400ms ease",
+            "transition": /CONFIG.transitionBuffered/,
             "clip-path": "inset(0px 0px 0px 0px)"
           },
           "ins p": {
@@ -679,7 +697,7 @@
             "-webkit-background-clip": "padding-box",
             "-moz-background-clip": "padding",
             "background-clip": "padding-box",
-            "transition": "all 400ms ease"
+            "transition": /CONFIG.transitionBuffered/
           },
           "ins p span": {
             "display": "inline-block",
@@ -779,10 +797,10 @@
             "-moz-transform": "rotateX(0deg)",
             "-ms-transform": "rotateX(0deg)",
             "transform": "rotateX(0deg)",
-            "-webkit-transition": "all 300ms ease",
-            "-moz-transition": "all 300ms ease",
-            "-ms-transition": "all 300ms ease",
-            "transition": "all 300ms ease"
+            "-webkit-transition": /CONFIG.transition/,
+            "-moz-transition": /CONFIG.transition/,
+            "-ms-transition": /CONFIG.transition/,
+            "transition": /CONFIG.transition/
           },
           "div#.detached.active ins": {
             "top": "30px",
@@ -1291,6 +1309,21 @@
                       console.warn(identity, "init:", "The top setting must be in CSS-compliant units.");
                     }
                     break;
+                  case "transitionmilliseconds":
+                    if (/^([0-9]|[1-9]\d+)$/.test(settings[rule])) {
+                      CONFIG.transitionComponent = parseInt(settings[rule]);
+                      TIME.transition = parseInt(settings[rule]);
+                    } else {
+                      console.warn(identity, "init:", "The transitionMilliseconds setting must be an Integer, 0 or greater.");
+                    }
+                    break;
+                  case "transitioneasing":
+                    if (/^(ease|linear|ease-in|ease-out|ease-in-out)$/i.test(settings[rule])) {
+                      CONFIG.transitionComponent = settings[rule].toLowerCase();
+                    } else {
+                      console.warn(identity, "init:", "The transitionEasing setting must be a CSS-compliant timing-function keyword.");
+                    }
+                    break;
                   case "zindex":
                     if (/^[1-9]\d*$/.test(settings[rule])) {
                       CONFIG.zIndex = Math.min(ZMAX, parseInt(settings[rule]));
@@ -1628,6 +1661,10 @@
         getConfig: function() {
           /* configurable options */
           return CONFIG;
+        },
+
+        getTransition: function() {
+          return CONFIG.transition();
         }
       };
     }

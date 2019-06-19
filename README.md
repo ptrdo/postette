@@ -1,5 +1,5 @@
 ###### This is pre-release software, but please **[log issues](https://github.com/ptrdo/postette/issues)** found.
-# Postette `v0.3.0`
+# Postette `v0.4.0`
 A zero-dependency gadget for the management and execution of notifications to a person interacting with a web client application.
 ### The Gist
 This JavaScript module, [postette.js](postette.js), should allow a web client to communicate important information to a person interacting with it, including alerts, warnings, and errors. Communicating important events to the person interacting with a web client is friendly and conducive to better usability. 
@@ -74,16 +74,16 @@ success Saved package.json
 **3:** The result of `yarn init` is a `package.json` file (per the example above):
 ```javascript
 {
-  "name": "my-project-name",
-  "version": "1.0.0",
-  "description": "Practicing the Postette.",
-  "main": "index.js",
-  "repository": {
-    "url": "https://github.com/my-account/my-project-name",
-    "type": "git"
+  name: "my-project-name",
+  version: "1.0.0",
+  description: "Practicing the Postette.",
+  main: "index.js",
+  repository: {
+    url: "https://github.com/my-account/my-project-name",
+    type: "git"
   },
-  "author": "My Name Here",
-  "license": "MIT"
+  author: "My Name Here",
+  license: "MIT"
 }
 ```
 
@@ -126,6 +126,8 @@ This supplies the code with any customizing parameters necessary for the particu
 | `integration` | *Boolean or null* | `null` | Always integrate when true, never when false, or automatic when null. A boolean value overrides [Notify Option](#notify-options) |
 | `tldr` | *Integer* | `72` | Too Long, Didn't Read is the minimum message length for defaulting to `integrate:true` (when integration is automatic). |
 | `modalSelector` | *Array* | `["[id^=modal].active"]` | Array of querySelector-compliant string(s) of DOM element(s) which would be incompatible with an integrated message. |
+| `transitionMilliseconds` | *Integer* | `300` | Establishes baseline for transition-duration. This value is buffered for DOM manipulation. Values less than 100 may have unpredictable results. |
+| `transitionEasing` | *String* | `ease` | Prescribes the timing-function keyword for transition effect. Possible values: `ease, linear, ease-in, ease-out, ease-in-out` |
 | `zIndex` | *Integer* | `2147483647-100` | Prescribes relative layering of the messaging element via CSS z-index. Default is `100` less than the maximum possible value. |
 | `zIndexLog` | *Integer* | `2147483647-500` | Prescribes relative layering of the log (print) element via CSS z-index. Default is `500` less than the maximum possible value. |
 | `top` | *String* | `"50px"` | Value attributable to CSS top (in sanctioned units, e/g "px", "rem", "%"). Integer-only value will be set as "px". |

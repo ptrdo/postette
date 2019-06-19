@@ -316,7 +316,9 @@
       Postette = window.postette;
       Postette.init({
         echo: true,
-        reiterate: true
+        reiterate: true,
+        transitionMilliseconds: 200,
+        transitionEasing: "ease-out"
       });
       addCustomClass("custom");
       render(document);
