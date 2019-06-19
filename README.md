@@ -1,6 +1,8 @@
 ###### This is pre-release software, but please **[log issues](https://github.com/ptrdo/postette/issues)** found.
 # Postette `v0.4.0`
-A zero-dependency gadget for the management and execution of notifications to a person interacting with a web client application.
+A gadget for establishing a dialogue between a web client application and the human interacting with it. 
+
+*Donnez-moi la postette!*
 ### The Gist
 This JavaScript module, [postette.js](postette.js), should allow a web client to communicate important information to a person interacting with it, including alerts, warnings, and errors. Communicating important events to the person interacting with a web client is friendly and conducive to better usability. 
 
