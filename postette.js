@@ -64,6 +64,7 @@
        * @property {String} version // the semantic versioning of this code.
        * @property {String} identity // the namespace prefixed to unique properties and attributes.
        * @property {String} markupId // the element ID of the HTML to be injected.
+       * @property {String} logId // an optional instance identifier for logging.
        * @property {Array} queue // a collection of the messages in queue for toast.
        * @property {Object} currentNotification // properties of current message in process of notification.
        * @property {Object} previousNotification // properties of most recent message in process of notification.
@@ -75,9 +76,10 @@
        * @property {Element} clickerElement // the currently rendered BUTTON (to dismiss).
        */
 
-      var version = "0.4.0",
+      var version = "0.4.1",
           identity = "postette",
           markupId = identity + Date.now(),
+          logId = null,
           queue = [],
           currentNotification = {},
           previousNotification = {},
@@ -286,10 +288,9 @@
       var queryUser = function () {
         var result = "unknown-user";
         try {
-          /* When authentication routines are present, here would be where they are called. */
-          result = markupId;
+          result = logId || markupId;
         } catch (err) {
-          console.warn(identity, "queryUser:", "A user was expected but not found.", err);
+          console.warn(identity, "queryUser:", "An instance identifier was expected but not found.", err);
         }
         return result;
       };
@@ -1665,6 +1666,14 @@
 
         getTransition: function() {
           return CONFIG.transition();
+        },
+
+        /**
+         * setLogId stipulates a value for logging, such as a UserName. 
+         * @param {String} id (optional) the value to log. Null clears and defaults to markupId (the instance identifier). 
+         */
+        setLogId: function (id) {
+          logId = typeof id === "undefined" || /^null$/i.test(id) ? null : id.toString();
         }
       };
     }

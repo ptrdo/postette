@@ -1,5 +1,5 @@
 ###### This is pre-release software, but please **[log issues](https://github.com/ptrdo/postette/issues)** found.
-# Postette `v0.4.0`
+# Postette `v0.4.1`
 A gadget for establishing a dialogue between a web client application and the human interacting with it. 
 
 *Donnez-moi la postette!*
@@ -166,6 +166,7 @@ See the [Notify Options](#notify-options) or the [code documentation](postette.j
 | `addModalSelector` | string | Runtime addition to querySelector elements incompatible with integrated appearance. |
 | `print` | quit | Renders collection of messages (since session start) to a dropdown list in the interface. Successive calls will toggle the list, or passing `true` will remove it for certain. |
 | `log` |  | Prints collection of messages (since session start) to the browser's console. |
+| `setLogId` | string/null | Optional instance identifier for logging (e.g. a username). |
 | `clearQueue` |  | Clears the queue of impending messages (history is unaffected). |
 | `clearHistory` |  | Clears the history of previous messages (queue is unaffected). |
 
